@@ -1,0 +1,23 @@
+---
+import type { Product } from "../data/products";
+
+interface Props {
+  product: Product;
+}
+
+const { product } = Astro.props;
+---
+
+<article class="bg-gray-900 rounded-lg overflow-hidden border border-gray-800 hover:border-gray-700 transition-colors">
+  <img
+    src={product.image}
+    alt={product.name}
+    class="w-full aspect-square object-cover"
+    loading="lazy"
+  />
+  <div class="p-4">
+    <h3 class="font-heading text-lg font-semibold text-brand-light">{product.name}</h3>
+    <p class="text-brand-accent font-medium mt-1">${product.price} AUD</p>
+    <p class="text-sm text-brand-muted mt-1">{product.description}</p>
+  </div>
+</article>

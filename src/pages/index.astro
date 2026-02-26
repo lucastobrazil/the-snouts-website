@@ -1,0 +1,113 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Home" description="The Snouts - Australian rock band. Discover our music, tour dates, gallery, and merch.">
+
+  <!-- Hero Section -->
+  <section class="relative flex items-center justify-center min-h-[60vh] md:min-h-[80vh] overflow-hidden">
+    <!-- Slideshow backgrounds -->
+    <div id="hero-slideshow" class="absolute inset-0">
+      <div class="hero-slide active" style="background-image: url('/images/hero-bg-2.jpg');"></div>
+      <div class="hero-slide " style="background-image: url('/images/hero-bg.jpg');"></div>
+    </div>
+
+    <!-- Dark gradient overlay for text readability -->
+    <div class="absolute inset-0 bg-gradient-to-b from-brand-dark/60 via-brand-dark/40 to-brand-dark z-10"></div>
+
+    <div class="relative z-20 container mx-auto mt-12 px-4 text-center">
+        <div class="w-100 mx-auto animate-punk-breathe">
+          <img src="/images/snoutspig_white.png" alt="The Snouts Logo" class="w-full animate-punk-slam" style="filter: drop-shadow(2px 14px 13px rgba(0, 0, 0, 0.7))" />
+        </div>
+      <!-- <p class="mt-4 text-lg md:text-xl text-brand-light/80 max-w-2xl mx-auto">
+        Raw sound. Live energy. Australian rock.
+      </p> -->
+      <div class="flex gap-1 mx-auto w-full justify-center mt-8">
+        <a
+          href="/music"
+          class="mt-8 inline-flex gap-1 bg-brand-primary text-white px-8 py-3 rounded-sm font-medium hover:opacity-90 transition-opacity"
+        >
+          Listen Now
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-music4-icon lucide-music-4"><path d="M9 18V5l12-2v13"/><path d="m9 9 12-2"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        </a>
+        <a
+          href="/tour-dates"
+          class="mt-8 inline-flex gap-1 bg-gray-500/30 text-white px-8 py-3 rounded-sm font-medium hover:opacity-90 transition-opacity"
+        >
+          Tour Dates
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mic-vocal-icon lucide-mic-vocal"><path d="m11 7.601-5.994 8.19a1 1 0 0 0 .1 1.298l.817.818a1 1 0 0 0 1.314.087L15.09 12"/><path d="M16.5 21.174C15.5 20.5 14.372 20 13 20c-2.058 0-3.928 2.356-6 2-2.072-.356-2.775-3.369-1.5-4.5"/><circle cx="16" cy="7" r="5"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const slides = document.querySelectorAll('.hero-slide');
+    if (slides.length > 1) {
+      let current = 0;
+      setInterval(() => {
+        slides[current].classList.remove('active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
+      }, 6000);
+    }
+  </script>
+
+  <!-- CTA Navigation Cards Section -->
+  <section class="py-30 md:py-24">
+    <div class="container mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-heading font-bold text-center mb-12">
+        Discover More
+      </h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <!-- Music Card -->
+        <a href="/music" class="bg-gray-900 border border-gray-800 rounded-xl p-6 hover:border-brand-primary/50 transition-colors group">
+          <svg class="w-8 h-8 mb-3 text-brand-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 18V5l12-2v13"/>
+            <circle cx="6" cy="18" r="3"/>
+            <circle cx="18" cy="16" r="3"/>
+          </svg>
+          <h3 class="text-lg font-heading font-bold text-white group-hover:text-brand-primary transition-colors">Music</h3>
+          <p class="text-sm text-brand-muted mt-2">Browse our discography and listen to tracks</p>
+        </a>
+
+        <!-- Tour Dates Card -->
+        <a href="/tour-dates" class="bg-gray-900 border border-gray-800 rounded-xl p-6 hover:border-brand-primary/50 transition-colors group">
+          <svg class="w-8 h-8 mb-3 text-brand-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2"/>
+            <path d="M16 2v4M8 2v4M3 10h18"/>
+            <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/>
+          </svg>
+          <h3 class="text-lg font-heading font-bold text-white group-hover:text-brand-primary transition-colors">Tour Dates</h3>
+          <p class="text-sm text-brand-muted mt-2">Check out upcoming live shows</p>
+        </a>
+
+        <!-- Gallery Card -->
+        <a href="/gallery" class="bg-gray-900 border border-gray-800 rounded-xl p-6 hover:border-brand-primary/50 transition-colors group">
+          <svg class="w-8 h-8 mb-3 text-brand-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <path d="M21 15l-5-5L5 21"/>
+          </svg>
+          <h3 class="text-lg font-heading font-bold text-white group-hover:text-brand-primary transition-colors">Gallery</h3>
+          <p class="text-sm text-brand-muted mt-2">Photos from the road and the studio</p>
+        </a>
+
+        <!-- Shop Card -->
+        <a href="/shop" class="bg-gray-900 border border-gray-800 rounded-xl p-6 hover:border-brand-primary/50 transition-colors group">
+          <svg class="w-8 h-8 mb-3 text-brand-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <path d="M3 6h18"/>
+            <path d="M16 10a4 4 0 01-8 0"/>
+          </svg>
+          <h3 class="text-lg font-heading font-bold text-white group-hover:text-brand-primary transition-colors">Shop</h3>
+          <p class="text-sm text-brand-muted mt-2">Grab merch and vinyl</p>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

@@ -1,0 +1,102 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const photos = [
+  { src: "/images/gallery/snouts1.jpg", alt: "The Snouts band photo" },
+  { src: "/images/gallery/snouts2.jpg", alt: "The Snouts live shot" },
+  { src: "/images/gallery/snouts3.jpg", alt: "The Snouts studio session" },
+  { src: "/images/gallery/snouts4.jpg", alt: "The Snouts behind the scenes" },
+  { src: "/images/gallery/snouts5.jpg", alt: "The Snouts on stage" },
+  { src: "/images/gallery/snouts6.jpg", alt: "The Snouts group portrait" },
+];
+---
+
+<BaseLayout title="Gallery" description="Photos of The Snouts live, in the studio, and behind the scenes.">
+  <section class="container mx-auto pl-10 pr-4 py-30">
+    <h1 class="text-4xl font-bold">Gallery</h1>
+    <p class="mt-2 mb-8 text-brand-muted">Live shots, studio sessions, and behind the scenes.</p>
+
+    <!-- Responsive photo grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {photos.map((photo) => (
+        <button
+          class="overflow-hidden rounded-lg cursor-pointer group focus:outline-none focus:ring-2 focus:ring-brand-accent"
+          data-src={photo.src}
+          data-alt={photo.alt}
+        >
+          <img
+            src={photo.src}
+            alt={photo.alt}
+            class="w-full h-64 object-cover object-[center_15%] transition-transform duration-300 group-hover:scale-105"
+            loading="lazy"
+          />
+        </button>
+      ))}
+    </div>
+
+    <!-- Lightbox modal -->
+    <div
+      id="lightbox"
+      class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Photo viewer"
+    >
+      <button
+        id="lightbox-close"
+        class="absolute top-4 right-4 text-white text-3xl leading-none hover:text-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent rounded z-10"
+        aria-label="Close photo viewer"
+      >&times;</button>
+      <img
+        id="lightbox-img"
+        class="max-h-[85vh] max-w-full rounded-lg object-contain"
+        src=""
+        alt=""
+      />
+    </div>
+  </section>
+
+  <script>
+    const galleryButtons = document.querySelectorAll<HTMLButtonElement>("[data-src]");
+    const lightbox = document.getElementById("lightbox")!;
+    const lightboxClose = document.getElementById("lightbox-close")!;
+    const lightboxImg = document.getElementById("lightbox-img") as HTMLImageElement;
+
+    function openLightbox(src: string, alt: string) {
+      lightboxImg.src = src;
+      lightboxImg.alt = alt;
+      lightbox.classList.remove("hidden");
+      lightbox.classList.add("flex");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeLightbox() {
+      lightbox.classList.add("hidden");
+      lightbox.classList.remove("flex");
+      lightboxImg.src = "";
+      document.body.style.overflow = "";
+    }
+
+    galleryButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const src = button.getAttribute("data-src") ?? "";
+        const alt = button.getAttribute("data-alt") ?? "";
+        openLightbox(src, alt);
+      });
+    });
+
+    lightboxClose.addEventListener("click", closeLightbox);
+
+    lightbox.addEventListener("click", (event) => {
+      if (event.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeLightbox();
+      }
+    });
+  </script>
+</BaseLayout>

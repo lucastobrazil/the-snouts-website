@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="About" description="The Snouts — five-piece melodic punk from Meanjin (Brisbane). Fast, hook-driven skate punk with ska energy and triple-vocal harmonies.">
+
+  <!-- Fixed background image docked right, fading to transparent -->
+  <div class="fixed inset-y-0 right-0 w-1/2 pointer-events-none z-0 hidden md:block" aria-hidden="true">
+    <div
+      class="absolute inset-0 bg-cover bg-center"
+      style="background-image: url('/images/hero-bg.jpg');"
+    ></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-brand-dark to-transparent"></div>
+    <div class="absolute inset-0 bg-brand-dark/40"></div>
+  </div>
+
+  <section class="relative z-10 container mx-auto pl-10 pr-4 py-30">
+    <h1 class="text-4xl font-bold">About</h1>
+
+    <div class="mt-8 max-w-[740px] space-y-6 text-lg text-gray-300 leading-relaxed">
+      <p>
+        The Snouts are a five-piece melodic punk band from Meanjin (Brisbane), delivering fast, hook-driven skate punk with ska energy and triple-vocal harmonies. Drawing on the grit of Propagandhi and the melodic punch of NOFX and Lagwagon, their sound is built for loud rooms and touring bills.
+      </p>
+      <p>
+        Their 2024 single <a href="https://thesnouts1.bandcamp.com/track/it-is-what-it-is" target="_blank" rel="noopener noreferrer" class="text-brand-primary/90 underline hover:text-brand-primary transition-colors"><em>It Is What It Is</em></a> landed at #17 in 4ZZZ's Hot 100, following consecutive chart placements in 2021 (<a href="https://thesnouts1.bandcamp.com/track/5-times" target="_blank" rel="noopener noreferrer" class="text-brand-primary/90 underline hover:text-brand-primary transition-colors"><em>5 Times</em></a> - #24) and 2022 — marking steady growth in Brisbane's independent scene. Featuring former members of Fire Away! and Brisbane City All Skas, The Snouts combine technical tightness with crowd-lifting choruses that land quickly in a 30–40 minute set.
+      </p>
+      <p>
+        They have shared stages with Mad Caddies, The Flangipanis and The Porkers, establishing themselves as a reliable, high-energy live act ready for international support slots.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,78 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { releases } from "../data/discography";
+---
+
+<BaseLayout title="Music" description="Listen to The Snouts — punk, ska, and whatever else from Brisbane. Stream and buy on Bandcamp.">
+
+  <!-- Fixed background image docked right, fading to transparent -->
+  <div class="fixed inset-y-0 right-0 w-1/2 pointer-events-none z-0 hidden md:block" aria-hidden="true">
+    <div
+      class="absolute inset-0 bg-cover bg-center"
+      style="background-image: url('/images/hero-bg-2.jpg');"
+    ></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-brand-dark to-transparent"></div>
+    <div class="absolute inset-0 bg-brand-dark/40"></div>
+  </div>
+
+  <section class="relative z-10 container mx-auto pl-10 pr-4 py-30">
+    <h1 class="text-4xl font-bold">Music</h1>
+    <p class="mt-4 text-lg text-brand-muted">
+      A blend of punk and ska, and whatever other genre we feel like inserting into songs.
+    </p>
+
+    {releases.length === 0 ? (
+      <p class="mt-12 text-brand-muted text-center text-lg">
+        No releases yet. Check back soon!
+      </p>
+    ) : (
+      <div class="mt-12 space-y-10">
+        {releases.map((release) => (
+          <article class="bg-gray-900/50 rounded-2xl p-6 border border-gray-800 max-w-[740px]">
+            <div class="flex flex-col md:flex-row gap-6">
+              <div class="flex-1 min-w-0">
+                <div class="flex items-baseline gap-3 flex-wrap">
+                  <h2 class="text-2xl font-bold font-heading">{release.title}</h2>
+                  <span class="text-sm text-brand-muted">
+                    {release.year} &middot; {release.type}
+                  </span>
+                </div>
+                {release.description && (
+                  <p class="text-brand-muted mt-2 mb-2">{release.description}</p>
+                )}
+
+                <iframe
+                  style="border: 0; width: 100%; height: 120px;"
+                  src={`https://bandcamp.com/EmbeddedPlayer/${release.bandcampType}=${release.bandcampId}/size=large/bgcol=111111/linkcol=ffffff/tracklist=false/artwork=small/transparent=true/`}
+                  seamless
+                  loading="lazy"
+                  title={`Bandcamp player for ${release.title}`}
+                />
+
+                <a
+                  href={release.bandcampUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-block mt-3 text-sm text-brand-muted hover:text-white transition-colors"
+                >
+                  View on Bandcamp &rarr;
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    )}
+
+    <div class="mt-16 text-center">
+      <a
+        href="https://thesnouts1.bandcamp.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-block bg-brand-primary text-white px-8 py-3 rounded-lg font-medium hover:opacity-90 transition-opacity"
+      >
+        Full Discography on Bandcamp
+      </a>
+    </div>
+  </section>
+</BaseLayout>

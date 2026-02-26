@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProductCard from "../components/ProductCard.astro";
+import { products } from "../data/products";
+---
+
+<BaseLayout title="Shop" description="Official The Snouts merchandise. Vinyl, shirts, and more.">
+  <section class="container mx-auto pl-10 pr-4 py-30">
+    <h1 class="text-4xl font-bold">Shop</h1>
+    <p class="mt-4 text-brand-muted">Official The Snouts merchandise. Prices in AUD.</p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
+      {products.map((product) => (
+        <ProductCard product={product} />
+      ))}
+    </div>
+
+    <p class="text-center text-brand-muted text-sm mt-12">
+      To purchase, DM us on Instagram or email thesnouts@email.com
+    </p>
+  </section>
+</BaseLayout>

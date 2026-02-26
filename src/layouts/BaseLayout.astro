@@ -1,0 +1,52 @@
+---
+import { SEO } from "astro-seo";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+}
+
+const { title, description, image = "/images/og-default.svg" } = Astro.props;
+const siteUrl = (Astro.site?.toString() ?? "https://thesnouts.com").replace(/\/$/, "");
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <SEO
+      title={title}
+      titleTemplate="%s | The Snouts"
+      titleDefault="The Snouts"
+      description={description}
+      openGraph={{
+        basic: {
+          title: title,
+          type: "website",
+          image: `${siteUrl}${image}`,
+          url: siteUrl,
+        },
+        optional: {
+          description: description,
+          siteName: "The Snouts",
+        },
+      }}
+      twitter={{
+        card: "summary_large_image",
+      }}
+    />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <Header />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

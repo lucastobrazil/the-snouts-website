@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+  <rect width="400" height="400" rx="12" fill="#0a0a0f" stroke="#6b7280" stroke-width="2"/>
+  <path d="M160 120 L140 140 L160 160 L160 280 L240 280 L240 160 L260 140 L240 120 Z" fill="none" stroke="#6b7280" stroke-width="2"/>
+  <text x="200" y="340" text-anchor="middle" fill="#6b7280" font-family="sans-serif" font-size="24" font-weight="bold">TEE</text>
+</svg>
