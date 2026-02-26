@@ -1,9 +1,63 @@
 /* BRAND: Replace tokens below with actual The Snouts brand values */
 @import "tailwindcss";
 
-/* Self-hosted fonts */
-@import "@fontsource/space-grotesk";
-@import "@fontsource/inter";
+/* Self-hosted fonts — using block to prevent FOUT */
+@font-face {
+  font-family: "Teko";
+  font-style: normal;
+  font-display: block;
+  font-weight: 300;
+  src: url(@fontsource/teko/files/teko-latin-300-normal.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Teko";
+  font-style: normal;
+  font-display: block;
+  font-weight: 400;
+  src: url(@fontsource/teko/files/teko-latin-400-normal.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Teko";
+  font-style: normal;
+  font-display: block;
+  font-weight: 500;
+  src: url(@fontsource/teko/files/teko-latin-500-normal.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Teko";
+  font-style: normal;
+  font-display: block;
+  font-weight: 600;
+  src: url(@fontsource/teko/files/teko-latin-600-normal.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Teko";
+  font-style: normal;
+  font-display: block;
+  font-weight: 700;
+  src: url(@fontsource/teko/files/teko-latin-700-normal.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-display: block;
+  font-weight: 400;
+  src: url(@fontsource/inter/files/inter-latin-400-normal.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-display: block;
+  font-weight: 500;
+  src: url(@fontsource/inter/files/inter-latin-500-normal.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-display: block;
+  font-weight: 700;
+  src: url(@fontsource/inter/files/inter-latin-700-normal.woff2) format("woff2");
+}
 
 /* The Snouts brand tokens -- placeholder values, easy to swap */
 @theme {
@@ -26,7 +80,7 @@
   --color-gray-900: #171717;
   --color-gray-950: #0a0a0a;
 
-  --font-heading: "Space Grotesk", sans-serif;
+  --font-heading: "Teko", sans-serif;
   --font-body: "Inter", sans-serif;
 }
 

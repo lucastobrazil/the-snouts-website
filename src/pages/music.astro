@@ -16,8 +16,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
     <div class="absolute inset-0 bg-brand-dark/40"></div>
   </div>
 
-  <section class="relative z-10 container mx-auto pl-10 pr-4 py-30">
-    <h1 class="text-4xl font-bold">Music</h1>
+  <section class="relative z-10 container mx-auto px-4 md:pl-10 pt-40 pb-30">
+    <h1 class="text-6xl md:text-7xl font-bold">Music</h1>
     <p class="mt-4 text-lg text-brand-muted">
       A blend of punk and ska, and whatever other genre we feel like inserting into songs.
     </p>
@@ -33,22 +33,24 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
             <div class="flex flex-col md:flex-row gap-6">
               <div class="flex-1 min-w-0">
                 <div class="flex items-baseline gap-3 flex-wrap">
-                  <h2 class="text-2xl font-bold font-heading">{release.title}</h2>
+                  <h2 class="text-4xl font-bold font-heading">{release.title}</h2>
                   <span class="text-sm text-brand-muted">
                     {release.year} &middot; {release.type}
                   </span>
                 </div>
-                {release.description && (
-                  <p class="text-brand-muted mt-2 mb-2">{release.description}</p>
-                )}
-
-                <iframe
-                  style="border: 0; width: 100%; height: 120px;"
-                  src={`https://bandcamp.com/EmbeddedPlayer/${release.bandcampType}=${release.bandcampId}/size=large/bgcol=111111/linkcol=ffffff/tracklist=false/artwork=small/transparent=true/`}
-                  seamless
-                  loading="lazy"
-                  title={`Bandcamp player for ${release.title}`}
-                />
+                <div class="relative mt-4" style="height: 120px;">
+                  <!-- Skeleton -->
+                  <div class="absolute inset-0 rounded-lg bg-gray-800 animate-pulse bc-skeleton"></div>
+                  <iframe
+                    class="relative z-10 opacity-0 transition-opacity duration-300"
+                    style="border: 0; width: 100%; height: 120px;"
+                    src={`https://bandcamp.com/EmbeddedPlayer/${release.bandcampType}=${release.bandcampId}/size=large/bgcol=111111/linkcol=ffffff/tracklist=false/artwork=small/transparent=true/`}
+                    seamless
+                    loading="lazy"
+                    title={`Bandcamp player for ${release.title}`}
+                    onload="this.classList.remove('opacity-0'); this.previousElementSibling.remove();"
+                  />
+                </div>
 
                 <a
                   href={release.bandcampUrl}
@@ -70,7 +72,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
         href="https://thesnouts1.bandcamp.com/"
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-block bg-brand-primary text-white px-8 py-3 rounded-lg font-medium hover:opacity-90 transition-opacity"
+        class="inline-block bg-gradient-to-b from-brand-primary to-brand-primary/70 text-white px-8 py-3 rounded-xl font-medium hover:opacity-90 transition-opacity"
       >
         Full Discography on Bandcamp
       </a>

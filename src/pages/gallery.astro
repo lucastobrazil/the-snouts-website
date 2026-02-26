@@ -13,8 +13,8 @@ const photos = [
 ---
 
 <BaseLayout title="Gallery" description="Photos of The Snouts live, in the studio, and behind the scenes.">
-  <section class="container mx-auto pl-10 pr-4 py-30">
-    <h1 class="text-4xl font-bold">Gallery</h1>
+  <section class="container mx-auto px-4 md:pl-10 pt-40 pb-30">
+    <h1 class="text-6xl md:text-7xl font-bold">Gallery</h1>
     <p class="mt-2 mb-8 text-brand-muted">Live shots, studio sessions, and behind the scenes.</p>
 
     <!-- Responsive photo grid -->
@@ -48,12 +48,35 @@ const photos = [
         class="absolute top-4 right-4 text-white text-3xl leading-none hover:text-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-accent rounded z-10"
         aria-label="Close photo viewer"
       >&times;</button>
+
+      <!-- Previous button -->
+      <button
+        id="lightbox-prev"
+        class="absolute left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-brand-accent rounded z-10"
+        aria-label="Previous photo"
+      >
+        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+
       <img
         id="lightbox-img"
         class="max-h-[85vh] max-w-full rounded-lg object-contain"
         src=""
         alt=""
       />
+
+      <!-- Next button -->
+      <button
+        id="lightbox-next"
+        class="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-brand-accent rounded z-10"
+        aria-label="Next photo"
+      >
+        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
     </div>
   </section>
 
@@ -61,11 +84,24 @@ const photos = [
     const galleryButtons = document.querySelectorAll<HTMLButtonElement>("[data-src]");
     const lightbox = document.getElementById("lightbox")!;
     const lightboxClose = document.getElementById("lightbox-close")!;
+    const lightboxPrev = document.getElementById("lightbox-prev")!;
+    const lightboxNext = document.getElementById("lightbox-next")!;
     const lightboxImg = document.getElementById("lightbox-img") as HTMLImageElement;
 
-    function openLightbox(src: string, alt: string) {
-      lightboxImg.src = src;
-      lightboxImg.alt = alt;
+    const photos = Array.from(galleryButtons).map((btn) => ({
+      src: btn.getAttribute("data-src") ?? "",
+      alt: btn.getAttribute("data-alt") ?? "",
+    }));
+    let currentIndex = 0;
+
+    function showPhoto(index: number) {
+      currentIndex = (index + photos.length) % photos.length;
+      lightboxImg.src = photos[currentIndex].src;
+      lightboxImg.alt = photos[currentIndex].alt;
+    }
+
+    function openLightbox(index: number) {
+      showPhoto(index);
       lightbox.classList.remove("hidden");
       lightbox.classList.add("flex");
       document.body.style.overflow = "hidden";
@@ -78,14 +114,12 @@ const photos = [
       document.body.style.overflow = "";
     }
 
-    galleryButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        const src = button.getAttribute("data-src") ?? "";
-        const alt = button.getAttribute("data-alt") ?? "";
-        openLightbox(src, alt);
-      });
+    galleryButtons.forEach((button, i) => {
+      button.addEventListener("click", () => openLightbox(i));
     });
 
+    lightboxPrev.addEventListener("click", () => showPhoto(currentIndex - 1));
+    lightboxNext.addEventListener("click", () => showPhoto(currentIndex + 1));
     lightboxClose.addEventListener("click", closeLightbox);
 
     lightbox.addEventListener("click", (event) => {
@@ -95,9 +129,10 @@ const photos = [
     });
 
     document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") {
-        closeLightbox();
-      }
+      if (lightbox.classList.contains("hidden")) return;
+      if (event.key === "Escape") closeLightbox();
+      if (event.key === "ArrowLeft") showPhoto(currentIndex - 1);
+      if (event.key === "ArrowRight") showPhoto(currentIndex + 1);
     });
   </script>
 </BaseLayout>
