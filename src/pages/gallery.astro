@@ -1,13 +1,14 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
 const photos = [
-  { src: "/images/gallery/snouts1.jpg", alt: "The Snouts band photo" },
-  { src: "/images/gallery/snouts2.jpg", alt: "The Snouts live shot" },
-  { src: "/images/gallery/snouts3.jpg", alt: "The Snouts studio session" },
-  { src: "/images/gallery/snouts4.jpg", alt: "The Snouts behind the scenes" },
-  { src: "/images/gallery/snouts5.jpg", alt: "The Snouts on stage" },
-  { src: "/images/gallery/snouts6.jpg", alt: "The Snouts group portrait" },
+  { src: `${base}/images/gallery/snouts1.jpg`, alt: "The Snouts band photo" },
+  { src: `${base}/images/gallery/snouts2.jpg`, alt: "The Snouts live shot" },
+  { src: `${base}/images/gallery/snouts3.jpg`, alt: "The Snouts studio session" },
+  { src: `${base}/images/gallery/snouts4.jpg`, alt: "The Snouts behind the scenes" },
+  { src: `${base}/images/gallery/snouts5.jpg`, alt: "The Snouts on stage" },
+  { src: `${base}/images/gallery/snouts6.jpg`, alt: "The Snouts group portrait" },
 ];
 ---
 

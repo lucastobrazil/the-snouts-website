@@ -1,5 +1,6 @@
 ---
 import type { Product } from "../data/products";
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
 interface Props {
   product: Product;
@@ -10,7 +11,7 @@ const { product } = Astro.props;
 
 <article class="bg-gray-900 rounded-lg overflow-hidden border border-gray-800 hover:border-gray-700 transition-colors">
   <img
-    src={product.image}
+    src={`${base}${product.image}`}
     alt={product.name}
     class="w-full aspect-square object-cover"
     loading="lazy"

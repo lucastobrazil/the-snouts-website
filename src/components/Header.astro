@@ -1,19 +1,20 @@
 ---
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Music", href: "/music" },
-  { label: "Tour Dates", href: "/tour-dates" },
-  { label: "Gallery", href: "/gallery" },
-  { label: "Shop", href: "/shop" },
+  { label: "Home", href: `${base}/` },
+  { label: "About", href: `${base}/about` },
+  { label: "Music", href: `${base}/music` },
+  { label: "Tour Dates", href: `${base}/tour-dates` },
+  { label: "Gallery", href: `${base}/gallery` },
+  { label: "Shop", href: `${base}/shop` },
 ];
 const currentPath = Astro.url.pathname;
 ---
 
 <header class="fixed h-[80px] top-0 left-0 right-0 z-20 bg-gradient-to-b from-black/80 to-transparent">
   <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
-    <a href="/" class="flex items-center gap-2">
-      <img src="/images/logo_white.png" alt="The Snouts" class="h-20" />
+    <a href={`${base}/`} class="flex items-center gap-2">
+      <img src={`${base}/images/logo_white.png`} alt="The Snouts" class="h-20" />
     </a>
 
     <!-- Desktop nav -->

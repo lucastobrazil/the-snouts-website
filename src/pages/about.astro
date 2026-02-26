@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 
 <BaseLayout title="About" description="The Snouts — five-piece melodic punk from Meanjin (Brisbane). Fast, hook-driven skate punk with ska energy and triple-vocal harmonies.">
@@ -8,7 +9,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <div class="fixed inset-y-0 right-0 w-1/2 pointer-events-none z-0 hidden md:block" aria-hidden="true">
     <div
       class="absolute inset-0 bg-cover bg-center"
-      style="background-image: url('/images/hero-bg.jpg');"
+      style={`background-image: url('${base}/images/hero-bg.jpg');`}
     ></div>
     <div class="absolute inset-0 bg-gradient-to-r from-brand-dark to-transparent"></div>
     <div class="absolute inset-0 bg-brand-dark/40"></div>
