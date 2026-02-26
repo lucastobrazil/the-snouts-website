@@ -9,11 +9,12 @@ const navLinks = [
   { label: "Shop", href: `${base}/shop` },
 ];
 const currentPath = Astro.url.pathname;
+const isHome = currentPath === `${base}/` || currentPath === `${base}`;
 ---
 
-<header class="fixed h-[80px] top-0 left-0 right-0 z-20 bg-gradient-to-b from-black/80 to-transparent">
+<header class="fixed h-[80px] top-0 left-0 right-0 z-40 bg-gradient-to-b from-black/80 to-transparent">
   <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
-    <a href={`${base}/`} class="flex items-center gap-2">
+    <a id="nav-logo" href={`${base}/`} class:list={["flex items-center gap-2 transition-opacity duration-300", isHome ? "opacity-0 md:opacity-100" : ""]}>
       <img src={`${base}/images/logo_white.png`} alt="The Snouts" class="h-20" />
     </a>
 
@@ -37,39 +38,89 @@ const currentPath = Astro.url.pathname;
     <!-- Mobile menu button -->
     <button
       id="mobile-menu-btn"
-      class="md:hidden text-gray-400 hover:text-white"
+      class="md:hidden text-gray-400 hover:text-white relative w-8 h-8"
       aria-label="Toggle menu"
+      aria-expanded="false"
     >
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <!-- Hamburger icon -->
+      <svg id="icon-open" class="w-7 h-7 absolute inset-0 m-auto transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+      <!-- Close icon -->
+      <svg id="icon-close" class="w-7 h-7 absolute inset-0 m-auto transition-opacity opacity-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
   </nav>
-
-  <!-- Mobile nav -->
-  <div id="mobile-menu" class="hidden md:hidden">
-    <ul class="container mx-auto px-4 py-4 space-y-3">
-      {navLinks.map((link) => (
-        <li>
-          <a
-            href={link.href}
-            class:list={[
-              "block text-sm font-medium transition-colors hover:text-white",
-              currentPath === link.href ? "text-white" : "text-gray-400",
-            ]}
-          >
-            {link.label}
-          </a>
-        </li>
-      ))}
-    </ul>
-  </div>
 </header>
+
+<!-- Mobile nav overlay (outside header so it can be full-screen) -->
+<div id="mobile-menu" class="fixed inset-0 z-50 hidden md:hidden" aria-modal="true">
+  <!-- Backdrop -->
+  <div id="mobile-backdrop" class="absolute inset-0 bg-black/90 backdrop-blur-sm"></div>
+
+  <!-- Close button -->
+  <button
+    id="mobile-menu-close"
+    class="absolute top-6 right-5 text-gray-400 hover:text-white z-10"
+    aria-label="Close menu"
+  >
+    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </button>
+
+  <!-- Links -->
+  <ul class="relative flex flex-col items-center justify-center h-full gap-6">
+    {navLinks.map((link) => (
+      <li>
+        <a
+          href={link.href}
+          class:list={[
+            "block text-2xl font-heading font-bold transition-colors hover:text-white",
+            currentPath === link.href ? "text-white" : "text-gray-400",
+          ]}
+        >
+          {link.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>
 
 <script>
   const btn = document.getElementById("mobile-menu-btn");
   const menu = document.getElementById("mobile-menu");
+  const closeBtn = document.getElementById("mobile-menu-close");
+  const backdrop = document.getElementById("mobile-backdrop");
+  const iconOpen = document.getElementById("icon-open");
+  const iconClose = document.getElementById("icon-close");
+
+  function openMenu() {
+    menu?.classList.remove("hidden");
+    iconOpen?.classList.add("opacity-0");
+    iconClose?.classList.remove("opacity-0");
+    btn?.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeMenu() {
+    menu?.classList.add("hidden");
+    iconOpen?.classList.remove("opacity-0");
+    iconClose?.classList.add("opacity-0");
+    btn?.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+  }
+
   btn?.addEventListener("click", () => {
-    menu?.classList.toggle("hidden");
+    const isOpen = !menu?.classList.contains("hidden");
+    isOpen ? closeMenu() : openMenu();
+  });
+
+  closeBtn?.addEventListener("click", closeMenu);
+  backdrop?.addEventListener("click", closeMenu);
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeMenu();
   });
 </script>

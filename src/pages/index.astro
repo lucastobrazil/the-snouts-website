@@ -16,8 +16,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
     <!-- Dark gradient overlay for text readability -->
     <div class="absolute inset-0 bg-gradient-to-b from-brand-dark/60 via-brand-dark/40 to-brand-dark z-10"></div>
 
-    <div class="relative z-20 container mx-auto mt-12 px-4 text-center">
-        <div class="w-100 mx-auto animate-punk-breathe">
+    <div class="relative z-20 container mx-auto mt-24 md:mt-12 px-4 text-center">
+        <div id="hero-logo" class="w-[80%] md:w-100 mx-auto animate-punk-breathe">
           <img src={`${base}/images/snoutspig_white.png`} alt="The Snouts Logo" class="w-full animate-punk-slam" style="filter: drop-shadow(2px 14px 13px rgba(0, 0, 0, 0.7))" />
         </div>
       <!-- <p class="mt-4 text-lg md:text-xl text-brand-light/80 max-w-2xl mx-auto">
@@ -51,6 +51,21 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
         current = (current + 1) % slides.length;
         slides[current].classList.add('active');
       }, 6000);
+    }
+
+    // Show nav logo on mobile once hero logo scrolls out of view
+    const heroLogo = document.getElementById("hero-logo");
+    const navLogo = document.getElementById("nav-logo");
+    if (heroLogo && navLogo) {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (window.innerWidth < 768) {
+            navLogo.classList.toggle("opacity-0", entry.isIntersecting);
+          }
+        },
+        { threshold: 0.1 }
+      );
+      observer.observe(heroLogo);
     }
   </script>
 
