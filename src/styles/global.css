@@ -63,7 +63,7 @@
 @theme {
   --color-brand-primary: #e5008b;
   --color-brand-accent: #d4d4d4;
-  --color-brand-dark: #0a0a0a;
+  --color-brand-dark: hsl(305, 83%, 3%);
   --color-brand-light: #f5f5f5;
   --color-brand-muted: #737373;
 
