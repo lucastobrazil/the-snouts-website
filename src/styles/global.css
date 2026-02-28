@@ -94,6 +94,10 @@
     color: var(--color-brand-light);
   }
   h1,
+  h2 {
+    filter: url(#grit);
+  }
+  h1,
   h2,
   h3,
   h4,

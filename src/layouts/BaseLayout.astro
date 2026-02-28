@@ -47,6 +47,24 @@ const siteUrl = (Astro.site?.toString() ?? "https://thesnouts.com").replace(/\/$
     />
   </head>
   <body class="min-h-screen flex flex-col">
+    <!-- SVG filter for distressed/gritty text -->
+    <svg class="absolute w-0 h-0" aria-hidden="true">
+      <filter id="grit">
+        <!-- Edge warp -->
+        <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="4" result="warp" />
+        <feDisplacementMap in="SourceGraphic" in2="warp" scale="2" xChannelSelector="R" yChannelSelector="G" result="warped" />
+        <!-- Interior grain, masked to text -->
+        <feTurbulence type="fractalNoise" baseFrequency="0.35" numOctaves="2" result="grain" />
+        <feColorMatrix type="saturate" values="0" in="grain" result="grainBW" />
+        <feComponentTransfer in="grainBW" result="grainDark">
+          <feFuncR type="linear" slope="0.4" intercept="0" />
+          <feFuncG type="linear" slope="0.4" intercept="0" />
+          <feFuncB type="linear" slope="0.4" intercept="0" />
+        </feComponentTransfer>
+        <feBlend in="warped" in2="grainDark" mode="multiply" result="gritty" />
+        <feComposite in="gritty" in2="warped" operator="in" />
+      </filter>
+    </svg>
     <Header />
     <main class="flex-1">
       <slot />
