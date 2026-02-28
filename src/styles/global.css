@@ -144,8 +144,14 @@
     }
   }
 
+  .animate-kenburns {
+    animation: kenburns-1 25s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    .hero-slide {
+    .hero-slide,
+    .animate-kenburns {
       animation: none;
       transition: none;
     }

@@ -7,9 +7,9 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 <BaseLayout title="Music" description="Listen to The Snouts — punk, ska, and whatever else from Brisbane. Stream and buy on Bandcamp.">
 
   <!-- Fixed background image docked right, fading to transparent -->
-  <div class="fixed inset-y-0 right-0 w-1/2 pointer-events-none z-0 hidden md:block" aria-hidden="true">
+  <div class="fixed inset-y-0 right-0 w-1/2 pointer-events-none z-0 hidden md:block overflow-hidden" aria-hidden="true">
     <div
-      class="absolute inset-0 bg-cover bg-center"
+      class="absolute inset-0 bg-cover bg-center animate-kenburns"
       style={`background-image: url('${base}/images/hero-bg-2.jpg');`}
     ></div>
     <div class="absolute inset-0 bg-gradient-to-r from-brand-dark to-transparent"></div>
