@@ -16,7 +16,16 @@ import { products } from "../data/products";
     </div>
 
     <p class="text-center text-brand-muted text-sm mt-12">
-      To purchase, DM us on Instagram or email thesnouts@email.com
+      To purchase, DM us on Instagram or email <a id="shop-contact" href="#" class="text-brand-primary/90 underline hover:text-brand-primary transition-colors">Enable JavaScript to see email</a>
     </p>
+
+  <script>
+    const el = document.getElementById('shop-contact');
+    if (el) {
+      const addr = ['thesnoutsband', 'gmail.com'].join('@');
+      el.href = 'mailto:' + addr;
+      el.textContent = addr;
+    }
+  </script>
   </section>
 </BaseLayout>
