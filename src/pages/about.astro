@@ -28,6 +28,19 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
       <p>
         They have shared stages with Mad Caddies, The Flangipanis and The Porkers, establishing themselves as a reliable, high-energy live act ready for international support slots.
       </p>
+      <p>
+        For bookings, contact us:
+        <a id="contact-email" href="#" class="text-brand-primary/90 underline hover:text-brand-primary transition-colors">Enable JavaScript to see email</a>
+      </p>
     </div>
+
+  <script>
+    const el = document.getElementById('contact-email');
+    if (el) {
+      const addr = ['thesnoutsband', 'gmail.com'].join('@');
+      el.href = 'mailto:' + addr;
+      el.textContent = addr;
+    }
+  </script>
   </section>
 </BaseLayout>
